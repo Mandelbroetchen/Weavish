@@ -34,7 +34,7 @@ In the first relation `I ()--<> EAT`, `I` is the object and `EAT` is the method.
 In the second relation `APPLE (1)--<> EAT`, the role `--(1) APPLE` means that `APPLE` is the direct subject of the verb `EAT`. (In Weavish jargon, `APPLE` is the first argument of the method `EAT`) Note that there is a 0-th argument of `EAT`, which is `I`, as the relation can be also written as `I (0)--<> EAT`. If the reader is familiar with Python, they can consider the following code that always outputs `True`. 
 
 ```
-Class Word
+Class Word:
     def EAT(self, direct_subject):
         ...
 
