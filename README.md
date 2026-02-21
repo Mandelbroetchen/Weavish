@@ -1,7 +1,7 @@
 # Weavish
 A graph-birelational constructed language
 
-## Introduction
+## Basics
 | Terminology | Analogy in other Languages | Remarks
 |-|-|-|
 | Word / Node / Vertex| Word| A unique symbol enbodying a single concept. Digitally written as English words in all-caps. 
@@ -9,7 +9,8 @@ A graph-birelational constructed language
 | Sentence / Web | Sentence | A connected network of multiple nodes. Represents a single sentence. 
 | Graph | Paragraph | A collection of webs. Represents a paragraph. 
 | Role / Anchor | Grammatical Roles | An anchor drawn at the end of a edge to point at a node. 
-| Object (Role) | Noun | Drawn as a circle at the end of a edge. Digitally written as `--()`
+| Object (Role) | Noun (Subject) | Drawn as a circle at the end of a edge. Digitally written as `--()`
+| Argument (Role) | Noun (Direct / Indirect Object) | Drawn as a circle at the end of a edge. Digitally written as `--(n)` with a natural number `n`. 
 | Method (Role) | Verb | Drawn as a diamond at the end of a edge. Digitally written as `--<>`
 | Property (Role) | Modifier | Drawn as a square at the end of a edge. Digitally written as `--[]`
 
@@ -31,7 +32,7 @@ In the sentence above. Note that `APPLE (1)--<> EAT` is considered equivalent to
 
 In the first relation `I ()--<> EAT`, `I` is the object and `EAT` is the method. If the reader is familiar with programming languages, they can infer that it is analogous to referring to a method of an object, i.e. `I.EAT`. 
 
-In the second relation `APPLE (1)--<> EAT`, the role `--(1) APPLE` means that `APPLE` is the direct subject of the verb `EAT`. (In Weavish jargon, `APPLE` is the first argument of the method `EAT`) Note that there is a 0-th argument of `EAT`, which is `I`, as the relation can be also written as `I (0)--<> EAT`. If the reader is familiar with Python, they can consider the following code that always outputs `True`. 
+In the second relation `APPLE (1)--<> EAT`, the role `--(1) APPLE` means that `APPLE` is the direct object (not to be confused with object (role)) of the verb `EAT`. (In Weavish jargon, `APPLE` is the first argument of the method `EAT`) Note that there is a 0-th argument of `EAT`, which is `I`, as the relation can be also written as `I (0)--<> EAT`. If the reader is familiar with Python, they can consider the following code that always outputs `True`. 
 
 ```
 Class Word:
@@ -87,8 +88,10 @@ APPLE (1)--<> EAT = 0
 ```
 Which is the recommanded way to write in Weavish. 
 
+## Indirect 
+
 ## Matrix Representation 
-We assign priorities to each role except the subjects
+We assign priorities to each role. 
 
 |Name | Literal | Priority
 |-|-|-|
