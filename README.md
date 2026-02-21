@@ -221,5 +221,5 @@ sentence = [
 print(
     sentence[id("I")][id("EAT")]
 )
-# This will outpu "1", which is the index of the invocation relation pointing from "I" to "EAT", indicating the roles of each node being "()" and "<>". 
+# This will output "2", which is the index of the invocation relation pointing from "I" to "EAT", indicating the roles of each node being "()" and "<>". 
 ```
