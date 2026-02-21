@@ -10,14 +10,14 @@ A graph-birelational constructed language
 | Graph | Paragraph | A collection of webs. Represents a paragraph. 
 | Role / Anchor | Grammatical Roles | An anchor drawn at the end of a edge to point at a node. 
 | Object (Role) | Noun (Subject) | Drawn as a circle at the end of a edge. Digitally written as `--()`
-| Argument (Role) | Noun (Direct / Indirect Object) | Drawn as a circle at the end of a edge. Digitally written as `--(n)` with a natural number `n`. 
+| Argument (Role) | Noun (Direct / Indirect Object) | Drawn as a circle at the end of a edge. Digitally written as `--(*^n)` with `*` repeating `n` times. 
 | Method (Role) | Verb | Drawn as a diamond at the end of a edge. Digitally written as `--<>`
 | Property (Role) | Modifier | Drawn as a square at the end of a edge. Digitally written as `--[]`
 
 **Example 1** 
 Consider the following sentence. 
 ```
-I ()--<> EAT <>--(1) APPLE
+I ()--<> EAT <>--(*) APPLE
 ```
 There are three nodes
 - `I`
@@ -28,15 +28,15 @@ And two relations
 - `I ()--<> EAT`
 - `APPLE (1)--<> EAT`
 
-In the sentence above. Note that `APPLE (1)--<> EAT` is considered equivalent to `EAT <>--(1) APPLE`, because the direction of a relation does not matter. 
+In the sentence above. Note that `APPLE (*)--<> EAT` is considered equivalent to `EAT <>--(*) APPLE`, because the direction of a relation does not matter. 
 
 In the first relation `I ()--<> EAT`, `I` is the object and `EAT` is the method. If the reader is familiar with programming languages, they can infer that it is analogous to referring to a method of an object, i.e. `I.EAT`. 
 
-In the second relation `APPLE (1)--<> EAT`, the role `--(1) APPLE` means that `APPLE` is the direct object (not to be confused with object (role)) of the verb `EAT`. (In Weavish jargon, `APPLE` is the first argument of the method `EAT`) Note that there is a 0-th argument of `EAT`, which is `I`, as the relation can be also written as `I (0)--<> EAT`. If the reader is familiar with Python, they can consider the following code that always outputs `True`. 
+In the second relation `APPLE (*)--<> EAT`, the role `--(*) APPLE` means that `APPLE` is the direct object (not to be confused with object (role)) of the verb `EAT`. (In Weavish jargon, `APPLE` is the first argument of the method `EAT`) Note that there is a 0-th argument of `EAT`, which is `I`, as the relation can be also written as `I (*^0)--<> EAT`. If the reader is familiar with Python, they can consider the following code that always outputs `True`. 
 
 ```
 Class Word:
-    def EAT(self, direct_subject):
+    def EAT(self, direct_object):
         ...
 
 I = Word(...)
@@ -46,15 +46,15 @@ print(
 )
 ```
 
-**Identifaction Number (ID)** In Weavish, you can assign an identification bumber (ID) to a node, so that you can point multiple relations to the same node. If the two relations in **Example 1**
+**Identifaction String (ID)** In Weavish, you can assign an identification bumber (ID) to a node, so that you can point multiple relations to the same node. If the two relations in **Example 1**
 - `I ()--<> EAT`
-- `APPLE (1)--<> EAT`
+- `APPLE (*)--<> EAT`
 
 Are put together as 
 
 ```
 I ()--<> EAT
-APPLE (1)--<> EAT
+APPLE (*)--<> EAT
 ```
 
 This would not be one sentence but two sentences, because each time you write a word without referencing to a existing word, you are declaring a new instance of the word. As the result, the two `EAT`s are considered diferent instances, and the sentences are translated to 
@@ -62,21 +62,21 @@ This would not be one sentence but two sentences, because each time you write a 
 > I eat. \
 Apple is eaten.
 
-To refer to an existing insance of word, one has to assign an ID to the word using the commutative `=` operator. IDs must be natural numbers. 
+To refer to an existing insance of word, one has to assign an ID to the word using the commutative `=` operator. An ID must be a string embraced by a pair of curvy brackets `{}`. 
 
 ```
-I ()--<> EAT = 1 
-I ()--<> 1 = EAT 
+I ()--<> EAT = {1} 
+I ()--<> {1} = EAT 
 # Because "=" is commutative, 
-# you can assign "1" to "EAT" in both ways!
+# you can assign "{1}" to "EAT" in both ways!
 ```
 
-To refer to the ID-ed word, one can simply use the dollar sign marker `#n` or repeat the assignment `WORD = n`, i.e. 
+To refer to the ID-ed word, one can simply use the dollar sign marker `#n` or repeat the assignment `WORD = #n`, i.e. 
 
 ```
-APPLE (1)--<> #1
-APPLE (1)--<> EAT = 1
-APPLE (1)--<> 1 = EAT
+APPLE (1)--<> {1}
+APPLE (1)--<> EAT = {1}
+APPLE (1)--<> {1} = EAT
 # They are all valid expressions!
 ```
 
@@ -97,20 +97,20 @@ We assign priorities to each role.
 | Object| `()` | 0
 | Method| `<>` | 1
 | Property | `[]` | 2
-| Subject | `(n)` | -
+| Argument | `(*^n)` | -
 
 So that each relation has at least one direction (or two directions if the relation has two same roles), pointing from the role with higher priority to the role lower priority. For example, the relation 
 `I ()--<> EAT = a` points from `I` to `EAT`, because `()` is higher prioritized than `<>`. (Smaller the number indicates higher priotity) We can sort all of the unique relations by comparing their higher priority roles (if they are the same, compare the other roels). 
 
-| Index | Name | Relation | Priorities | Direction
-|-|-|-|-|-|
-|1| Objective Identity Relation | `()--()` | 0-0 | <=>
-|2| Invocation Relation| `()--<>` | 0-1 | ==>
-|3| Accession Relation| `()--[]` | 0-2 | ==>
-|4| Functional Identity Relation| `<>--<>` | 1-1 | <=>
-|5| Functional Accession Relation | `<>--[]` | 1-2 | ==>
-|6| Characteristic Identity Relation| `[]--[]` | 2-2 | <=>
-|6+n| Argumentation Relation | `<>--(n)` | 1-2 | ==>
+| Index | Name                             | Relation  | Priorities | Direction |
+|-------|----------------------------------|-----------|------------|-----------|
+| 1     | Objective Identity Relation      | `()--()`  | 0-0        | <=>       |
+| 2     | Invocation Relation              | `()--<>`  | 0-1        | ==>       |
+| 3     | Accession Relation               | `()--[]`  | 0-2        | ==>       |
+| 4     | Functional Identity Relation     | `<>--<>`  | 1-1        | <=>       |
+| 5     | Functional Accession Relation    | `<>--[]`  | 1-2        | ==>       |
+| 6     | Characteristic Identity Relation | `[]--[]`  | 2-2        | <=>       |
+| 6+n   | Argumentation Relation           | `<>--(*^n)` | 1-2        | ==>       |
 
 ## Relations
 
@@ -136,23 +136,55 @@ ALICE ()--() ? ()--<> EAT <>--(1) APPLE
 This sentence translates to "She eats apple" with the context of "she" being Alice. To simulate pronouns, one can attach a accesion relation to `?`
 
 ```
-? = 0 ()--() ALICE
-? = 0 ()--<> EAT <>--(1) APPLE
-? = 0 ()--[] FEMININITY
+? = {0} ()--() ALICE
+? = {0} ()--<> EAT <>--(1) APPLE
+? = {0} ()--[] FEMININITY
 ```
 
 When drawn on a paper, this will look like 
 
 ```
 ALICE ()--() ? ()--<> EAT <>--(1) APPLE
-            ()
-            |
-            |
-            []
-            Femininity
+            ( )
+             |
+            [ ]
+            FEMININITY
 ```
 
 ### Invocation Relations
+
+The invocation relation is analogous to invoking a method of an object in object oriented programming languages. This serves the "SV" part in SVO languages. 
+
+### Accession Relations and Characteristic Identity Relations
+
+The accession relation accesses a property from the object. For example, one can access the `COLOR` property of `APPLE` with the following example. 
+
+```
+I ()--<> EAT <>--(1) APPLE ()--[] COLOR []--[] RED 
+# I eat apple whose color is red
+```
+
+### Functional Identity Relation
+
+## Plurals
+
+The simplest way to express plural objects is to repeat the nodes. 
+
+```
+I ()--<> EAT = {0} <>--(1) APPLE
+               {0} <>--(1) APPLE
+# I eat two apples
+```
+
+Or use the word `COMBINATION`
+
+```
+I ()--<> EAT <>--(1) COMBINATION = {0} <>--() APPLE
+                                   {0} <>--(1) APPLE
+# I eat two apples
+```
+
+
 
 ## Matrix Representation
 
@@ -165,7 +197,7 @@ I ()--<> EAT <>--(1) APPLE
 First, we assign each word an ID consectively. 
 
 ```
-I=0 ()--<> EAT=1 <>--(1) APPLE=2
+I = {0} ()--<> EAT = {1} <>--(1) APPLE = {2}
 ```
 
 Consider the python code. 
