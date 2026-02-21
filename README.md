@@ -88,9 +88,8 @@ APPLE (1)--<> EAT = 0
 ```
 Which is the recommanded way to write in Weavish. 
 
-## Indirect 
 
-## Matrix Representation 
+## Directions and Relation Names
 We assign priorities to each role. 
 
 |Name | Literal | Priority
@@ -103,15 +102,59 @@ We assign priorities to each role.
 So that each relation has at least one direction (or two directions if the relation has two same roles), pointing from the role with higher priority to the role lower priority. For example, the relation 
 `I ()--<> EAT = a` points from `I` to `EAT`, because `()` is higher prioritized than `<>`. (Smaller the number indicates higher priotity) We can sort all of the unique relations by comparing their higher priority roles (if they are the same, compare the other roels). 
 
-| Index | Name | Relation | Priorities | 
-|-|-|-|-|
-|1| Objective Identity Relation | `()--()` | 0-0
-|2| Invocation Relation| `()--<>` | 0-1
-|3| Accession Relation| `()--[]` | 0-2
-|4| Functional Identity Relation| `<>--<>` | 1-1
-|5| Functional Accession Relation | `<>--[]` | 1-2
-|6| Characteristic Identity Relation| `[]--[]` | 2-2
-|6+n| Argumentation Relation | `<>--(n)` | 1-2
+| Index | Name | Relation | Priorities | Direction
+|-|-|-|-|-|
+|1| Objective Identity Relation | `()--()` | 0-0 | <=>
+|2| Invocation Relation| `()--<>` | 0-1 | ==>
+|3| Accession Relation| `()--[]` | 0-2 | ==>
+|4| Functional Identity Relation| `<>--<>` | 1-1 | <=>
+|5| Functional Accession Relation | `<>--[]` | 1-2 | ==>
+|6| Characteristic Identity Relation| `[]--[]` | 2-2 | <=>
+|6+n| Argumentation Relation | `<>--(n)` | 1-2 | ==>
+
+## Relations
+
+In section **Basics** we have already encountered the invocation relation `()--<>` and the primary argumentation relation `<>--(1)`. In this section, we will go through the other relations. 
+
+### Objective Identity Relations
+The objective identity relations indicates a objectively equivalence between two objects. 
+```
+I ()--() ALICE # I am Alice
+```
+**Alias** Weaveish has no direct pronouns, instead we use alises to refer to objects. Consider the sentence "She eats apple", in Weavish, this would be written as
+
+```
+? ()--<> EAT <>--(1) APPLE
+```
+
+The object of `EAT` remains unknown untill it is clarified which object has an objective identity relation with the alias `?`. 
+
+```
+ALICE ()--() ? ()--<> EAT <>--(1) APPLE
+```
+
+This sentence translates to "She eats apple" with the context of "she" being Alice. To simulate pronouns, one can attach a accesion relation to `?`
+
+```
+? = 0 ()--() ALICE
+? = 0 ()--<> EAT <>--(1) APPLE
+? = 0 ()--[] FEMININITY
+```
+
+When drawn on a paper, this will look like 
+
+```
+ALICE ()--() ? ()--<> EAT <>--(1) APPLE
+            ()
+            |
+            |
+            []
+            Femininity
+```
+
+### Invocation Relations
+
+## Matrix Representation
 
 We can then use matraces to encode sentences. Recall **Example 1**
 
