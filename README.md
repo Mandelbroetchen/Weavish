@@ -87,14 +87,15 @@ APPLE (1)--<> EAT = 0
 ```
 Which is the recommanded way to write in Weavish. 
 
-**Direction** We assign priorities to each role
+## Matrix Representation 
+We assign priorities to each role except the subjects
 
 |Name | Literal | Priority
 |-|-|-|
 | Object| `()` | 0
 | Method| `<>` | 1
 | Property | `[]` | 2
-| Subject | `(n)` | 3
+| Subject | `(n)` | -
 
 So that each relation has at least one direction (or two directions if the relation has two same roles), pointing from the role with higher priority to the role lower priority. For example, the relation 
 `I ()--<> EAT = a` points from `I` to `EAT`, because `()` is higher prioritized than `<>`. (Smaller the number indicates higher priotity) We can sort all of the unique relations by comparing their higher priority roles (if they are the same, compare the other roels). 
