@@ -29,7 +29,7 @@ And two relations
 
 In the sentence above. Note that `APPLE (1)--<> EAT` is considered equivalent to `EAT <>--(1) APPLE`, because the direction of a relation does not matter. 
 
-In the first relation `I ()--<> EAT`, `I` is the object and `EAT` is the method. If the reader is familiar to programming languages, they can infer that it is analogous to referring to a method of an object, i.e. `I.EAT`. 
+In the first relation `I ()--<> EAT`, `I` is the object and `EAT` is the method. If the reader is familiar with programming languages, they can infer that it is analogous to referring to a method of an object, i.e. `I.EAT`. 
 
 In the second relation `APPLE (1)--<> EAT`, the role `--(1) APPLE` means that `APPLE` is the direct subject of the verb `EAT`. (In Weavish jargon, `APPLE` is the first argument of the method `EAT`) Note that there is a 0-th argument of `EAT`, which is `I`, as the relation can be also written as `I (0)--<> EAT`. If the reader is familiar with Python, they can consider the following code that always outputs `True`. 
 
