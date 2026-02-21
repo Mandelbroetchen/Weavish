@@ -133,22 +133,22 @@ The object of `EAT` remains unknown untill it is clarified which object has an o
 ALICE ()--() ? ()--<> EAT <>--(1) APPLE
 ```
 
-This sentence translates to "She eats apple" with the context of "she" being Alice. To simulate pronouns, one can attach a accesion relation to `?`
+This sentence translates to "They eat apple" with the context of "they" being Alice. To simulate gendered pronouns, one can attach an accesion relation to `?`
 
 ```
 ? = {0} ()--() ALICE
 ? = {0} ()--<> EAT <>--(1) APPLE
-? = {0} ()--[] FEMININITY
+? = {0} ()--[] GENDER []--[] FEMININITY
 ```
 
 When drawn on a paper, this will look like 
 
 ```
-ALICE ()--() ? ()--<> EAT <>--(1) APPLE
-            ( )
-             |
-            [ ]
-            FEMININITY
+FEMININITY []--[] GENDER []--() ? ()--<> EAT <>--(1) APPLE
+                               ( )
+                                |
+                               [ ]
+                            FEMININITY
 ```
 
 ### Invocation Relations
