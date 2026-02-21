@@ -147,8 +147,8 @@ When drawn on a paper, this will look like
 FEMININITY []--[] GENDER []--() ? ()--<> EAT <>--(1) APPLE
                                ( )
                                 |
-                               [ ]
-                            FEMININITY
+                               ( )
+                              ALICE
 ```
 
 ### Invocation Relations
