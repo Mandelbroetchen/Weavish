@@ -14,7 +14,7 @@ A graph-birelational constructed language
 | Method (Role) | Verb | Drawn as a diamond at the end of a edge. Digitally written as `--<>`
 | Property (Role) | Modifier | Drawn as a square at the end of a edge. Digitally written as `--[]`
 
-**Example 1** 
+**Example 1 SVO** 
 Consider the following sentence. 
 ```
 I ()--<> EAT <>--(*) APPLE
@@ -44,6 +44,16 @@ APPLE = Word(...)
 print(
     I.EAT(APPLE) == Word.EAT(I, APPLE)
 )
+```
+
+**Example 2 Negation** To negate, one uses the word `FALSE`. 
+
+```
+I ()--<> EAT <>--(*) APPLE
+         ( )
+          |
+         < >
+        FALSE
 ```
 
 **Identifaction String (ID)** In Weavish, you can assign an identification bumber (ID) to a node, so that you can point multiple relations to the same node. If the two relations in **Example 1**
@@ -166,6 +176,10 @@ I ()--<> EAT <>--(1) APPLE ()--[] COLOR []--[] RED
 
 ### Functional Identity Relation
 
+```
+ALICE ()--<> WILL <>--<> EAT <>--(*) APPLE
+```
+
 ## Plurals
 
 The simplest way to express plural objects is to repeat the nodes. 
@@ -222,4 +236,8 @@ print(
     sentence[id("I")][id("EAT")]
 )
 # This will output "2", which is the index of the invocation relation pointing from "I" to "EAT", indicating the roles of each node being "()" and "<>". 
+```
+
+```
+[]--() HIGHT []--[] IMPORTANCE []--() STUDY <>--(*) INFORMATION 
 ```
