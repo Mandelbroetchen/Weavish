@@ -102,15 +102,15 @@ We assign priorities to each role.
 So that each relation has at least one direction (or two directions if the relation has two same roles), pointing from the role with higher priority to the role lower priority. For example, the relation 
 `I ()--<> EAT = a` points from `I` to `EAT`, because `()` is higher prioritized than `<>`. (Smaller the number indicates higher priotity) We can sort all of the unique relations by comparing their higher priority roles (if they are the same, compare the other roels). 
 
-| Index | Name                             | Relation  | Priorities | Direction |
-|-------|----------------------------------|-----------|------------|-----------|
-| 1     | Objective Identity Relation      | `()--()`  | 0-0        | <=>       |
-| 2     | Invocation Relation              | `()--<>`  | 0-1        | ==>       |
-| 3     | Accession Relation               | `()--[]`  | 0-2        | ==>       |
-| 4     | Functional Identity Relation     | `<>--<>`  | 1-1        | <=>       |
-| 5     | Functional Accession Relation    | `<>--[]`  | 1-2        | ==>       |
-| 6     | Characteristic Identity Relation | `[]--[]`  | 2-2        | <=>       |
-| 6+n   | Argumentation Relation           | `<>--(*^n)` | 1-2        | ==>       |
+| Index | Name                             | Relation    | Priorities | Direction |
+|-------|----------------------------------|-------------|------------|-----------|
+| 1     | Objective Identity Relation      | `()--()`    | 0-0        | <=>       |
+| 2     | Invocation Relation              | `()--<>`    | 0-1        | ==>       |
+| 3     | Accession Relation               | `()--[]`    | 0-2        | ==>       |
+| 4     | Functional Identity Relation     | `<>--<>`    | 1-1        | <=>       |
+| 5     | Functional Accession Relation    | `<>--[]`    | 1-2        | ==>       |
+| 6     | Characteristic Identity Relation | `[]--[]`    | 2-2        | <=>       |
+| 6+n   | Argumentation Relation           | `<>--(*^n)` | -          | ==>       |
 
 ## Relations
 
