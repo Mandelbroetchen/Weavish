@@ -1,7 +1,15 @@
 # Weavish
 A graph-birelational constructed language
 
+## Introduction
+
+```
+THIS ()--() INTRODUCTION (*)--() WEAVISH ()--<> BE <>--() LANGUAGE = #0 (*)--() CONSTRUCTION 
+#0 ()--[] []--[] GRAPH
+
+```
 ## Basics
+
 | Terminology | Analogy in other Languages | Remarks
 |-|-|-|
 | Word / Node / Vertex| Word| A unique symbol enbodying a single concept. Digitally written as English words in all-caps. 
